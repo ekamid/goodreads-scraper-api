@@ -1,33 +1,34 @@
 export interface Parameter {
-  name: string
-  type: string
-  required: boolean
-  description: string
-  placeholder?: string
-  options?: string[]
+  name: string;
+  type: string;
+  required: boolean;
+  description: string;
+  placeholder?: string;
+  options?: string[];
 }
 
 export interface Endpoint {
-  id: string
-  name: string
-  description: string
-  method: string
-  url: string
-  parameters: Parameter[]
-  exampleResponse: any
+  id: string;
+  name: string;
+  description: string;
+  method: string;
+  url: string;
+  parameters: Parameter[];
+  exampleResponse: any;
   codeSnippets: {
-    javascript: string
-    typescript: string
-    python: string
-    nodejs: string
-  }
+    javascript: string;
+    typescript: string;
+    python: string;
+    nodejs: string;
+  };
 }
 
 export const endpoints: Endpoint[] = [
   {
     id: "get-book-lists",
     name: "Get Book Lists",
-    description: "Retrieve lists of books based on category, genre, or popularity.",
+    description:
+      "Retrieve lists of books based on category, genre, or popularity.",
     method: "GET",
     url: "/api/lists",
     parameters: [
@@ -36,7 +37,13 @@ export const endpoints: Endpoint[] = [
         type: "select",
         required: true,
         description: "Type of list to retrieve",
-        options: ["bestsellers", "most-read", "top-rated", "new-releases", "genre"],
+        options: [
+          "bestsellers",
+          "most-read",
+          "top-rated",
+          "new-releases",
+          "genre",
+        ],
       },
       {
         name: "genre",
@@ -63,7 +70,8 @@ export const endpoints: Endpoint[] = [
             id: "58490567",
             title: "Fourth Wing",
             author: "Rebecca Yarros",
-            cover: "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
             rating: 4.58,
             url: "https://www.goodreads.com/book/show/58490567-fourth-wing",
           },
@@ -71,7 +79,8 @@ export const endpoints: Endpoint[] = [
             id: "62023642",
             title: "Iron Flame",
             author: "Rebecca Yarros",
-            cover: "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
             rating: 4.72,
             url: "https://www.goodreads.com/book/show/62023642-iron-flame",
           },
@@ -187,7 +196,8 @@ export async function GET(request) {
   {
     id: "get-book-details",
     name: "Get Book Details",
-    description: "Retrieve detailed information about a specific book by its Goodreads ID.",
+    description:
+      "Retrieve detailed information about a specific book by its Goodreads ID.",
     method: "GET",
     url: "/api/books/:id",
     parameters: [
@@ -238,7 +248,8 @@ export async function GET(request) {
             id: "40045999",
             title: "A Court of Silver Flames",
             author: "Sarah J. Maas",
-            cover: "https://images.gr-assets.com/books/1602570691m/40045999.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1602570691m/40045999.jpg",
             rating: 4.53,
           },
         ],
@@ -380,7 +391,8 @@ export async function GET(request, { params }) {
   {
     id: "get-author-details",
     name: "Get Author Details",
-    description: "Retrieve detailed information about an author by their Goodreads ID.",
+    description:
+      "Retrieve detailed information about an author by their Goodreads ID.",
     method: "GET",
     url: "/api/authors/:id",
     parameters: [
@@ -409,14 +421,16 @@ export async function GET(request, { params }) {
           {
             id: "58490567",
             title: "Fourth Wing",
-            cover: "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
             rating: 4.58,
             publicationDate: "May 2, 2023",
           },
           {
             id: "62023642",
             title: "Iron Flame",
-            cover: "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
             rating: 4.72,
             publicationDate: "November 7, 2023",
           },
@@ -614,7 +628,8 @@ export async function GET(request, { params }) {
             id: "58490567",
             title: "Fourth Wing",
             author: "Rebecca Yarros",
-            cover: "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
             rating: 4.58,
             publicationDate: "May 2, 2023",
             genres: ["Fantasy", "Romance", "New Adult"],
@@ -623,7 +638,8 @@ export async function GET(request, { params }) {
             id: "123456789",
             title: "Fourth Wing: The Empyrean Collector's Edition",
             author: "Rebecca Yarros",
-            cover: "https://images.gr-assets.com/books/1234567890m/123456789.jpg",
+            cover:
+              "https://images.gr-assets.com/books/1234567890m/123456789.jpg",
             rating: 4.65,
             publicationDate: "November 7, 2023",
             genres: ["Fantasy", "Romance", "New Adult"],
@@ -797,7 +813,8 @@ export async function GET(request) {
         name: "limit",
         type: "number",
         required: false,
-        description: "Number of books to return per shelf (default: 10, max: 50)",
+        description:
+          "Number of books to return per shelf (default: 10, max: 50)",
         placeholder: "20",
       },
     ],
@@ -816,7 +833,8 @@ export async function GET(request) {
                 id: "58490567",
                 title: "Fourth Wing",
                 author: "Rebecca Yarros",
-                cover: "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
+                cover:
+                  "https://images.gr-assets.com/books/1676401063m/58490567.jpg",
                 rating: 4.58,
                 userRating: 5,
                 dateAdded: "2023-06-15",
@@ -825,7 +843,8 @@ export async function GET(request) {
                 id: "62023642",
                 title: "Iron Flame",
                 author: "Rebecca Yarros",
-                cover: "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
+                cover:
+                  "https://images.gr-assets.com/books/1683767749m/62023642.jpg",
                 rating: 4.72,
                 userRating: 5,
                 dateAdded: "2023-11-10",
@@ -840,7 +859,8 @@ export async function GET(request) {
                 id: "40045999",
                 title: "A Court of Silver Flames",
                 author: "Sarah J. Maas",
-                cover: "https://images.gr-assets.com/books/1602570691m/40045999.jpg",
+                cover:
+                  "https://images.gr-assets.com/books/1602570691m/40045999.jpg",
                 rating: 4.53,
                 userRating: 0,
                 dateAdded: "2023-12-01",
@@ -1047,8 +1067,10 @@ export async function GET(request, { params }) {
             user: {
               id: "12345678",
               name: "Sarah Reader",
-              profile: "https://www.goodreads.com/user/show/12345678-sarah-reader",
-              avatar: "https://images.gr-assets.com/users/1234567890p2/12345678.jpg",
+              profile:
+                "https://www.goodreads.com/user/show/12345678-sarah-reader",
+              avatar:
+                "https://images.gr-assets.com/users/1234567890p2/12345678.jpg",
             },
             rating: 5,
             date: "Dec 15, 2023",
@@ -1061,8 +1083,10 @@ export async function GET(request, { params }) {
             user: {
               id: "23456789",
               name: "John Bookworm",
-              profile: "https://www.goodreads.com/user/show/23456789-john-bookworm",
-              avatar: "https://images.gr-assets.com/users/2345678901p2/23456789.jpg",
+              profile:
+                "https://www.goodreads.com/user/show/23456789-john-bookworm",
+              avatar:
+                "https://images.gr-assets.com/users/2345678901p2/23456789.jpg",
             },
             rating: 4,
             date: "Nov 20, 2023",
@@ -1250,14 +1274,16 @@ export async function GET(request, { params }) {
         name: "bookId",
         type: "string",
         required: false,
-        description: "Goodreads book ID (either bookId or authorId is required)",
+        description:
+          "Goodreads book ID (either bookId or authorId is required)",
         placeholder: "58490567",
       },
       {
         name: "authorId",
         type: "string",
         required: false,
-        description: "Goodreads author ID (either bookId or authorId is required)",
+        description:
+          "Goodreads author ID (either bookId or authorId is required)",
         placeholder: "7363610",
       },
       {
@@ -1475,7 +1501,8 @@ export async function GET(request) {
   {
     id: "about",
     name: "About",
-    description: "Information about the Goodreads Scraper API, its team, and usage terms.",
+    description:
+      "Information about the Goodreads Scraper API, its team, and usage terms.",
     method: "",
     url: "",
     parameters: [],
@@ -1487,4 +1514,4 @@ export async function GET(request) {
       nodejs: "",
     },
   },
-]
+];

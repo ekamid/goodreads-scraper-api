@@ -13,7 +13,7 @@ The Goodreads Scraper API provides developers with access to book data from Good
 ### Base URL
 
 ```
-http://gdscraper.bookishnearby.com
+https://gdscraper.bookishnearby.com
 ```
 
 To obtain an API key, [contact us](mailto:api@goodreads-scraper.com) or sign up on our [developer portal](https://api.goodreads-scraper.com/developers).

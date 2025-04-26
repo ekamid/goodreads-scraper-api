@@ -1,33 +1,31 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ApiSidebar } from "@/components/api-sidebar"
-import { ApiContent } from "@/components/api-content"
-import { endpoints } from "@/lib/api-endpoints"
-import { AboutPage } from "@/components/about-page"
-import { ChangelogPage } from "@/components/changelog-page"
-import { StatusPage } from "@/components/status-page"
+import { useEffect } from "react";
+import { ApiContent } from "@/components/api-content";
+import { endpoints } from "@/lib/api-endpoints";
+import { useApi } from "@/lib/api-context";
 
 export function ApiDocs() {
-  const [activeEndpoint, setActiveEndpoint] = useState(endpoints[0].id)
+  const { activeEndpoint, setActiveEndpoint } = useApi();
 
-  const renderContent = () => {
-    switch (activeEndpoint) {
-      case "about":
-        return <AboutPage />
-      case "changelog":
-        return <ChangelogPage />
-      case "status":
-        return <StatusPage />
-      default:
-        return <ApiContent endpoint={endpoints.find((e) => e.id === activeEndpoint)!} />
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash && endpoints.some(e => e.id === hash)) {
+      setActiveEndpoint(hash);
     }
-  }
+
+    const handleHashChange = () => {
+      const newHash = window.location.hash.slice(1);
+      if (newHash && endpoints.some(e => e.id === newHash)) {
+        setActiveEndpoint(newHash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [setActiveEndpoint]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
-      <ApiSidebar endpoints={endpoints} activeEndpoint={activeEndpoint} setActiveEndpoint={setActiveEndpoint} />
-      {renderContent()}
-    </div>
-  )
+    <ApiContent endpoint={endpoints.find((e) => e.id === activeEndpoint)!} />
+  );
 }
