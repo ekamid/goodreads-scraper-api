@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { ApiContent } from "@/components/api-content";
 import { endpoints } from "@/lib/api-endpoints";
-import { useApi } from "@/lib/api-context";
+import { useActiveEndpointContext } from "@/lib/active-endpoint-context";
 
 export function ApiDocs() {
-  const { activeEndpoint, setActiveEndpoint } = useApi();
+  const { activeEndpoint, setActiveEndpoint } = useActiveEndpointContext();
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);

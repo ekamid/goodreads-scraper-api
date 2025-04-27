@@ -60,7 +60,7 @@ export function ChangelogPage() {
                         </li>
                         <li>
                           <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/books/:id
+                            /api/book/details/:slug
                           </code>{" "}
                           - Get detailed information about a specific book
                         </li>
@@ -84,7 +84,7 @@ export function ChangelogPage() {
                         </li>
                         <li>
                           <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/books/:id/reviews
+                            /api/book/details/:slug/reviews
                           </code>{" "}
                           - Get reviews for a specific book
                         </li>
@@ -198,7 +198,7 @@ export function ChangelogPage() {
                       <ul className="list-disc pl-5 mt-2 space-y-1">
                         <li>
                           <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/books/:id
+                            /api/book/details/:slug
                           </code>
                         </li>
                         <li>

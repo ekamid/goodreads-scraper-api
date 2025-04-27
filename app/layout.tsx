@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ApiProvider } from "@/lib/api-context";
+import { ApiProvider } from "@/lib/active-endpoint-context";
 import { ApiSidebar } from "@/components/api-sidebar";
 import { endpoints } from "@/lib/api-endpoints";
 

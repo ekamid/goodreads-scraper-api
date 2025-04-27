@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release of the Goodreads Scraper API
 - Core endpoints:
   - `/api/lists` - Get book lists by category, genre, or popularity
-  - `/api/books/:id` - Get detailed information about a specific book
+  - `/api/book/details/:slug` - Get detailed information about a specific book
   - `/api/authors/:id` - Get detailed information about an author
   - `/api/search` - Search for books by title, author, or ISBN
   - `/api/users/:username/shelves` - Get a user's bookshelves and their books
-  - `/api/books/:id/reviews` - Get reviews for a specific book
+  - `/api/book/details/:slug/reviews` - Get reviews for a specific book
   - `/api/quotes` - Get quotes from a book or by an author
 - API key authentication system
 - Rate limiting (1,000 requests per day for free tier)
@@ -47,7 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Alpha release for internal testing
 - Implemented core endpoints:
-  - `/api/books/:id`
+  - `/api/book/details/:slug`
   - `/api/authors/:id`
   - `/api/search`
   - `/api/lists`

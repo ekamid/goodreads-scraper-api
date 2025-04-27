@@ -31,6 +31,11 @@ import { Copy, Play, CheckCircle2 } from "lucide-react";
 import { CodeBlock } from "@/components/code-block";
 import { motion } from "framer-motion";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+console.log('BASE_URL')
+console.log(`basee ${BASE_URL}`)
+
 interface ApiContentProps {
   endpoint: Endpoint;
 }
@@ -103,7 +108,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                   <CardDescription>
                     Base URL:{" "}
                     <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-sm">
-                      https://grscraper.bookishnearby.com
+                      {BASE_URL}
                     </code>
                   </CardDescription>
                 )}

@@ -29,7 +29,7 @@ export function AboutPage() {
             <CardContent className="space-y-4 relative z-10">
             <p className="text-slate-600 dark:text-slate-400">
             The Goodreads Scraper API was built during a caffeine-fueled coding sprint as part of the R&D project <Link href="https://bookishnearby.com" className="text-emerald-500 hover:underline" target="_blank" rel="noopener noreferrer">Nearby Bookish</Link>; a platform that connects local readers to share books, engage in discussions, and foster a sense of community around reading. 
-            When Goodreads shut down their API, one stubborn developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
+            Since Goodreads shut down their API, one overwhelmed developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
             </p>
             <p className="text-slate-600 dark:text-slate-400">
               Developer: <Link href="https://github.com/ekamid" className="text-emerald-500 hover:underline" target="_blank" rel="noopener noreferrer">Ebrahim Khalil</Link> (professional overthinker and sometimes pretends to be a book nerd)

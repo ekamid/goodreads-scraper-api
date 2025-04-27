@@ -23,11 +23,11 @@ To obtain an API key, [contact us](mailto:api@goodreads-scraper.com) or sign up 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/lists` | GET | Get book lists by category, genre, or popularity |
-| `/api/books/:id` | GET | Get detailed information about a specific book |
+| `/api/book/details/:slug` | GET | Get detailed information about a specific book |
 | `/api/authors/:id` | GET | Get detailed information about an author |
 | `/api/search` | GET | Search for books by title, author, or ISBN |
 | `/api/users/:username/shelves` | GET | Get a user's bookshelves and their books |
-| `/api/books/:id/reviews` | GET | Get reviews for a specific book |
+| `/api/book/details/:slug/reviews` | GET | Get reviews for a specific book |
 | `/api/quotes` | GET | Get quotes from a book or by an author |
 
 ## 🚀 Quick Start Examples
@@ -149,7 +149,7 @@ In case of an error:
 ## 👥 Who Made This?
 
 The Goodreads Scraper API was built during a caffeine-fueled coding sprint as part of the R&D project [Nearby Bookish](https://bookishnearby.com); a platform that connects local readers to share books, engage in discussions, and foster a sense of community around reading.  
-When Goodreads shut down their API, one stubborn developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
+Since Goodreads shut down their API, one overwhelmed developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
 
 **Developer**: [Ebrahim Khalil](https://github.com/ekamid) (professional overthinker and sometimes pretends to be a book nerd)
 

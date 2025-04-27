@@ -27,7 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { useApi } from "@/lib/api-context";
+import { useActiveEndpointContext } from "@/lib/active-endpoint-context";
 
 interface ApiSidebarProps {
   endpoints: Endpoint[];
@@ -37,7 +37,7 @@ interface ApiSidebarProps {
 export function ApiSidebar({
   endpoints,
 }: Omit<ApiSidebarProps, "setActiveEndpoint">) {
-  const { activeEndpoint, setActiveEndpoint } = useApi();
+  const { activeEndpoint, setActiveEndpoint } = useActiveEndpointContext();
   const [isEndpointsOpen, setIsEndpointsOpen] = useState(true);
   const [isResourcesOpen, setIsResourcesOpen] = useState(true);
 
@@ -240,7 +240,7 @@ export function SidebarLink({
   children,
   id,
 }: SidebarLinkProps) {
-  const { setActiveEndpoint } = useApi();
+  const { setActiveEndpoint } = useActiveEndpointContext();
 
   return (
     <Link
