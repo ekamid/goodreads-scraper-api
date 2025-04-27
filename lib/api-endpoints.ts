@@ -1,3 +1,4 @@
+import { getAuthorBooksApiParameters } from "@/data/api-endpoint/get-author-books";
 import { getAuthorDetailsApiParameters, getAuthorDetailsApiResponse } from "@/data/api-endpoint/get-author-details";
 import {
   getBookDetailsApiParameters,
@@ -60,7 +61,7 @@ export const endpoints: Endpoint[] = [
     id: "get-book-details",
     name: "Get Book Details",
     description:
-      "Retrieve detailed information about a specific book by its Goodreads ID.",
+      "Retrieve detailed information about a specific book by its Goodreads slug.",
     method: "GET",
     url: "/api/book/details/:slug",
     route: "/api/book/details",
@@ -72,11 +73,23 @@ export const endpoints: Endpoint[] = [
     id: "get-author-details",
     name: "Get Author Details",
     description:
-      "Retrieve detailed information about an author by their Goodreads ID.",
+      "Retrieve detailed information about an author by their Goodreads slug.",
     method: "GET",
     url: "/api/author/details/:slug",
     route: "/api/author/details",
     parameters: getAuthorDetailsApiParameters,
+    exampleResponse: getAuthorDetailsApiResponse,
+    codeSnippets: getBookListsCodeSnippets,
+  },
+  {
+    id: "get-author-books",
+    name: "Get Author Books",
+    description:
+      "Retrieve author's books by their Goodreads slug.",
+    method: "GET",
+    url: "/api/author/books/:slug",
+    route: "/api/author/books/",
+    parameters: getAuthorBooksApiParameters,
     exampleResponse: getAuthorDetailsApiResponse,
     codeSnippets: getBookListsCodeSnippets,
   },

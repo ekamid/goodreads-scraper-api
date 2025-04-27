@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Endpoint } from "@/lib/api-endpoints";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -18,6 +18,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -27,7 +28,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Copy, Play, CheckCircle2 } from "lucide-react";
+import { Copy, Play, CheckCircle2, XIcon } from "lucide-react";
 import { CodeBlock } from "@/components/code-block";
 import { motion } from "framer-motion";
 import { CopyBlock } from "@/components/copy-block";
@@ -36,6 +37,37 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ApiContentProps {
   endpoint: Endpoint;
+}
+
+function buildEndpointUrl(endpoint: Endpoint, params: Record<string, string>) {
+  let url = `${BASE_URL}${endpoint.url}`;
+
+  // Replace path parameters
+  Object.keys(params).forEach((key) => {
+    const param = endpoint.parameters.find((p) => p.name === key);
+    if (param && !param.type.includes("select")) {
+      url = url.replace(`:${key}`, params[key] || `{${key}}`);
+    }
+  });
+
+  // Add query parameters (only once, if they are non-empty and not used as path params)
+  const queryParams = new URLSearchParams();
+
+  endpoint.parameters.forEach((param) => {
+    const value = params[param.name];
+    const isPathParam = url.includes(`/${value}`);
+
+    if (!isPathParam && value && value.trim() !== "") {
+      queryParams.set(param.name, value); // 'set' ensures no duplicates
+    }
+  });
+
+  const queryString = queryParams.toString();
+  if (queryString) {
+    url += `?${queryString}`;
+  }
+
+  return url;
 }
 
 export function ApiContent({ endpoint }: ApiContentProps) {
@@ -47,9 +79,13 @@ export function ApiContent({ endpoint }: ApiContentProps) {
     typescript: false,
     python: false,
     nodejs: false,
-    response: false
+    response: false,
   });
   const [requestTime, setRequestTime] = useState<number | null>(null);
+
+  useEffect(() => {
+    console.log(params);
+  }, [params]);
 
   const handleParamChange = (key: string, value: string) => {
     setParams((prev) => ({ ...prev, [key]: value }));
@@ -80,6 +116,26 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
         const startTime = performance.now();
         const response = await fetch(`/api/author/details/${slug}`);
+        const endTime = performance.now();
+        setRequestTime(endTime - startTime);
+
+        const data = await response.json();
+        setResponse(JSON.stringify(data, null, 2));
+      } else if (endpoint.id === "get-author-books") {
+        const slug = params.slug;
+        if (!slug) {
+          throw new Error("Slug is required");
+        }
+
+        const queryParams = new URLSearchParams();
+        if (params.sort) queryParams.set("sort", params.sort);
+        if (params.page) queryParams.set("page", params.page);
+        if (params.limit) queryParams.set("limit", params.limit);
+
+        const startTime = performance.now();
+        const response = await fetch(
+          `/api/author/books/${slug}?${queryParams.toString()}`
+        );
         const endTime = performance.now();
         setRequestTime(endTime - startTime);
 
@@ -119,7 +175,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
         setCopied({ ...copied, response: false });
       }, 2000);
     } catch (err) {
-      console.error('Failed to copy response:', err);
+      console.error("Failed to copy response:", err);
     }
   };
 
@@ -153,7 +209,9 @@ export function ApiContent({ endpoint }: ApiContentProps) {
           <TabsList className="mb-4">
             <TabsTrigger value="documentation">Documentation</TabsTrigger>
             <TabsTrigger value="try-it">Try It</TabsTrigger>
-            <TabsTrigger className="hidden" value="code-snippets">Code Snippets</TabsTrigger>
+            <TabsTrigger className="hidden" value="code-snippets">
+              Code Snippets
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="documentation">
@@ -233,7 +291,9 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2"
-                        onClick={() => handleCopyResponse(endpoint.exampleResponse)}
+                        onClick={() =>
+                          handleCopyResponse(endpoint.exampleResponse)
+                        }
                       >
                         {copied.response ? (
                           <CheckCircle2 className="h-4 w-4 text-green-500" />
@@ -261,22 +321,23 @@ export function ApiContent({ endpoint }: ApiContentProps) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4 mb-6">
-                <CopyBlock 
-                  content={`${BASE_URL}/api/book/details/${params.slug || '{slug}'}`}
-                  className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm mb-4"
-                >
-                  <div>
-                    {BASE_URL}/api/book/details/{params.slug || '{slug}'}
-                  </div>
-                </CopyBlock>
+                  <CopyBlock
+                    content={buildEndpointUrl(endpoint, params)}
+                    className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm mb-4"
+                  >
+                    <div>{buildEndpointUrl(endpoint, params)}</div>
+                  </CopyBlock>
                   {endpoint.parameters.map((param) => (
-                    <div key={param.name}>
+                    <div key={param.name} className="relative">
                       <Label htmlFor={param.name}>
                         {param.name}
-                        <span className="text-red-500">*</span>
+                        {param.required && (
+                          <span className="text-red-500">*</span>
+                        )}
                       </Label>
                       {param.type === "select" ? (
                         <Select
+                          value={params[param.name]}
                           onValueChange={(value) =>
                             handleParamChange(param.name, value)
                           }
@@ -291,6 +352,19 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                               </SelectItem>
                             ))}
                           </SelectContent>
+                          {params[param.name]?.length > 0 && (
+                            <button
+                              onClick={() => {
+                                setParams((prev) => ({
+                                  ...prev,
+                                  [param.name]: "",
+                                }));
+                              }}
+                              className="mt-1 absolute right-14 top-1/2 -translate-y-1/2 rounded-sm p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                            >
+                              <XIcon className="h-4 w-4" />
+                            </button>
+                          )}
                         </Select>
                       ) : (
                         <Input
@@ -307,6 +381,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                       )}
                       <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                         {param.description}
+                        {param.required && " (Required)"}
                       </p>
                     </div>
                   ))}
@@ -316,7 +391,13 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                   onClick={handleTryIt}
                   disabled={
                     loading ||
-                    (endpoint.id === "get-book-details" && !params.slug)
+                    endpoint.parameters
+                      .filter((param) => param.required)
+                      .some(
+                        (param) =>
+                          !params[param.name] ||
+                          params[param.name].trim() === ""
+                      )
                   }
                   className="mb-6 bg-emerald-600 hover:bg-emerald-700"
                 >
@@ -332,7 +413,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                         Request completed in {requestTime.toFixed(2)}ms
                       </p>
                     )}
-                    <CopyBlock 
+                    <CopyBlock
                       content={response}
                       className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96"
                     >
