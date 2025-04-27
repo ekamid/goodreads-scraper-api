@@ -53,6 +53,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
   const handleTryIt = async () => {
     setLoading(true);
+    setResponse(null)
     try {
       if (endpoint.id === "get-book-details") {
         const slug = params.slug;
@@ -250,6 +251,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                           placeholder={
                             param.placeholder || `Enter ${param.name}`
                           }
+                          value={params[param.name]}
                           className="mt-1"
                           onChange={(e) =>
                             handleParamChange(param.name, e.target.value)
