@@ -40,7 +40,7 @@ export interface Endpoint {
   route: string;
   parameters: Parameter[];
   exampleResponse: any;
-  codeSnippets?: CodeSnippets;
+  codeSnippets: CodeSnippets;
 }
 
 export const endpoints: Endpoint[] = [

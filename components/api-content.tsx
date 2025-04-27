@@ -30,6 +30,7 @@ import {
 import { Copy, Play, CheckCircle2 } from "lucide-react";
 import { CodeBlock } from "@/components/code-block";
 import { motion } from "framer-motion";
+import { CopyBlock } from "@/components/copy-block";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -41,7 +42,13 @@ export function ApiContent({ endpoint }: ApiContentProps) {
   const [params, setParams] = useState<Record<string, string>>({});
   const [response, setResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState<Record<string, boolean>>({});
+  const [copied, setCopied] = useState({
+    javascript: false,
+    typescript: false,
+    python: false,
+    nodejs: false,
+    response: false
+  });
   const [requestTime, setRequestTime] = useState<number | null>(null);
 
   const handleParamChange = (key: string, value: string) => {
@@ -102,6 +109,18 @@ export function ApiContent({ endpoint }: ApiContentProps) {
     setTimeout(() => {
       setCopied({ ...copied, [language]: false });
     }, 2000);
+  };
+
+  const handleCopyResponse = async (response: any) => {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(response, null, 2));
+      setCopied({ ...copied, response: true });
+      setTimeout(() => {
+        setCopied({ ...copied, response: false });
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy response:', err);
+    }
   };
 
   return (
@@ -209,7 +228,19 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                 {Object.keys(endpoint.exampleResponse).length > 0 && (
                   <>
                     <h3 className="text-lg font-semibold mb-2">Response</h3>
-                    <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96">
+                    <div className="relative bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="absolute top-2 right-2"
+                        onClick={() => handleCopyResponse(endpoint.exampleResponse)}
+                      >
+                        {copied.response ? (
+                          <CheckCircle2 className="h-4 w-4 text-green-500" />
+                        ) : (
+                          <Copy className="h-4 w-4" />
+                        )}
+                      </Button>
                       <pre>
                         {JSON.stringify(endpoint.exampleResponse, null, 2)}
                       </pre>
@@ -230,9 +261,14 @@ export function ApiContent({ endpoint }: ApiContentProps) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4 mb-6">
-                <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm mb-4">
-                  {BASE_URL}/api/book/details/{params.slug || '{slug}'}
-                </div>
+                <CopyBlock 
+                  content={`${BASE_URL}/api/book/details/${params.slug || '{slug}'}`}
+                  className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm mb-4"
+                >
+                  <div>
+                    {BASE_URL}/api/book/details/{params.slug || '{slug}'}
+                  </div>
+                </CopyBlock>
                   {endpoint.parameters.map((param) => (
                     <div key={param.name}>
                       <Label htmlFor={param.name}>
@@ -296,9 +332,12 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                         Request completed in {requestTime.toFixed(2)}ms
                       </p>
                     )}
-                    <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96">
+                    <CopyBlock 
+                      content={response}
+                      className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96"
+                    >
                       <pre>{response}</pre>
-                    </div>
+                    </CopyBlock>
                   </div>
                 )}
               </CardContent>
