@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Core endpoints:
   - `/api/lists` - Get book lists by category, genre, or popularity
   - `/api/book/details/:slug` - Get detailed information about a specific book
-  - `/api/authors/:id` - Get detailed information about an author
+  - `/api/author/details/:slug` - Get detailed information about an author
   - `/api/search` - Search for books by title, author, or ISBN
   - `/api/users/:username/shelves` - Get a user's bookshelves and their books
   - `/api/book/details/:slug/reviews` - Get reviews for a specific book
@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Alpha release for internal testing
 - Implemented core endpoints:
   - `/api/book/details/:slug`
-  - `/api/authors/:id`
+  - `/api/author/details/:slug`
   - `/api/search`
   - `/api/lists`
 - Basic authentication system
@@ -95,4 +95,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | 0.9.x   | Security Updates Only | 2024-10-25 |
 | 0.8.x   | No Support     | 2024-04-25       |
 
-For migration guides and assistance, please contact support@goodreads-scraper.com.
+For migration guides and assistance, please contact ebrahimkha71@gmail.com.

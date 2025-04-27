@@ -66,7 +66,7 @@ export function ChangelogPage() {
                         </li>
                         <li>
                           <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/authors/:id
+                            /api/author/details/:slug
                           </code>{" "}
                           - Get detailed information about an author
                         </li>
@@ -100,139 +100,6 @@ export function ChangelogPage() {
                     <li>Rate limiting (1,000 requests per day for free tier)</li>
                     <li>Comprehensive documentation</li>
                     <li>Official JavaScript and Python client libraries</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Version 0.9.0 */}
-          <div className="relative">
-            <div className="absolute left-0 top-6 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 z-10"></div>
-            <div className="absolute left-1.5 top-10 bottom-0 w-1 bg-slate-200 dark:bg-slate-700"></div>
-            <div className="pl-8">
-              <div className="flex items-center gap-3 mb-4">
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">0.9.0</h2>
-                <Badge
-                  variant="outline"
-                  className="text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
-                >
-                  Beta
-                </Badge>
-                <span className="text-sm text-slate-500 dark:text-slate-400">March 15, 2024</span>
-              </div>
-
-              <Card className="mb-4 border-slate-200 dark:border-slate-700">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-emerald-600 dark:text-emerald-400">Added</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>Beta release for selected partners</li>
-                    <li>
-                      Added{" "}
-                      <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">/api/quotes</code>{" "}
-                      endpoint for retrieving book and author quotes
-                    </li>
-                    <li>Implemented pagination for all list-based endpoints</li>
-                    <li>Added sorting options for reviews and search results</li>
-                    <li>Expanded book details to include series information</li>
-                    <li>Added similar books recommendations to book details</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="mb-4 border-slate-200 dark:border-slate-700">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-amber-600 dark:text-amber-400">Changed</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>Improved error handling with detailed error messages</li>
-                    <li>Enhanced rate limiting with better header information</li>
-                    <li>Optimized response times for all endpoints</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="mb-6 border-slate-200 dark:border-slate-700">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-blue-600 dark:text-blue-400">Fixed</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>Fixed UTF-8 encoding issues with non-English book titles and author names</li>
-                    <li>Resolved inconsistencies in date formatting across endpoints</li>
-                    <li>Fixed search functionality to properly handle special characters</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Version 0.8.0 */}
-          <div className="relative">
-            <div className="absolute left-0 top-6 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 z-10"></div>
-            <div className="absolute left-1.5 top-10 bottom-0 w-1 bg-slate-200 dark:bg-slate-700"></div>
-            <div className="pl-8">
-              <div className="flex items-center gap-3 mb-4">
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">0.8.0</h2>
-                <Badge
-                  variant="outline"
-                  className="text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
-                >
-                  Alpha
-                </Badge>
-                <span className="text-sm text-slate-500 dark:text-slate-400">February 10, 2024</span>
-              </div>
-
-              <Card className="mb-4 border-slate-200 dark:border-slate-700">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-emerald-600 dark:text-emerald-400">Added</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>Alpha release for internal testing</li>
-                    <li>
-                      Implemented core endpoints:
-                      <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>
-                          <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/book/details/:slug
-                          </code>
-                        </li>
-                        <li>
-                          <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/authors/:id
-                          </code>
-                        </li>
-                        <li>
-                          <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">
-                            /api/search
-                          </code>
-                        </li>
-                        <li>
-                          <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-xs">/api/lists</code>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>Basic authentication system</li>
-                    <li>Simple rate limiting</li>
-                    <li>Initial documentation</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="mb-6 border-slate-200 dark:border-slate-700">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-red-600 dark:text-red-400">Known Issues</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>Inconsistent date formatting across endpoints</li>
-                    <li>Limited error handling</li>
-                    <li>Performance issues with large result sets</li>
-                    <li>No pagination for list-based endpoints</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -375,10 +242,10 @@ export function ChangelogPage() {
           <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
             For migration guides and assistance, please contact{" "}
             <a
-              href="mailto:support@goodreads-scraper.com"
+              href="mailto:ebrahimkha71@gmail.com"
               className="text-emerald-600 dark:text-emerald-400 hover:underline"
             >
-              support@goodreads-scraper.com
+              ebrahimkha71@gmail.com
             </a>
             .
           </p>

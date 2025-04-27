@@ -33,9 +33,6 @@ import { motion } from "framer-motion";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-console.log('BASE_URL')
-console.log(`basee ${BASE_URL}`)
-
 interface ApiContentProps {
   endpoint: Endpoint;
 }
@@ -53,7 +50,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
   const handleTryIt = async () => {
     setLoading(true);
-    setResponse(null)
+    setResponse(null);
     try {
       if (endpoint.id === "get-book-details") {
         const slug = params.slug;
@@ -68,20 +65,31 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
         const data = await response.json();
         setResponse(JSON.stringify(data, null, 2));
-      } else {
+      } else if (endpoint.id === "get-author-details") {
+        const slug = params.slug;
+        if (!slug) {
+          throw new Error("Slug is required");
+        }
+
         const startTime = performance.now();
-        // Simulate API call for example responses
-        await new Promise(resolve => setTimeout(resolve, 500));
+        const response = await fetch(`/api/author/details/${slug}`);
         const endTime = performance.now();
         setRequestTime(endTime - startTime);
-        
-        setResponse(JSON.stringify(endpoint.exampleResponse, null, 2));
+
+        const data = await response.json();
+        setResponse(JSON.stringify(data, null, 2));
       }
     } catch (error) {
-      setResponse(JSON.stringify({
-        error: "Failed to fetch book details",
-        message: error instanceof Error ? error.message : "Unknown error"
-      }, null, 2));
+      setResponse(
+        JSON.stringify(
+          {
+            error: "Failed to fetch author details",
+            message: error instanceof Error ? error.message : "Unknown error",
+          },
+          null,
+          2
+        )
+      );
       setRequestTime(null);
     } finally {
       setLoading(false);
@@ -126,7 +134,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
           <TabsList className="mb-4">
             <TabsTrigger value="documentation">Documentation</TabsTrigger>
             <TabsTrigger value="try-it">Try It</TabsTrigger>
-            <TabsTrigger value="code-snippets">Code Snippets</TabsTrigger>
+            <TabsTrigger className="hidden" value="code-snippets">Code Snippets</TabsTrigger>
           </TabsList>
 
           <TabsContent value="documentation">
@@ -222,6 +230,9 @@ export function ApiContent({ endpoint }: ApiContentProps) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4 mb-6">
+                <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm mb-4">
+                  {BASE_URL}/api/book/details/{params.slug || '{slug}'}
+                </div>
                   {endpoint.parameters.map((param) => (
                     <div key={param.name}>
                       <Label htmlFor={param.name}>
@@ -267,7 +278,10 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
                 <Button
                   onClick={handleTryIt}
-                  disabled={loading || (endpoint.id === "get-book-details" && !params.slug)}
+                  disabled={
+                    loading ||
+                    (endpoint.id === "get-book-details" && !params.slug)
+                  }
                   className="mb-6 bg-emerald-600 hover:bg-emerald-700"
                 >
                   {loading ? "Loading..." : "Execute Request"}

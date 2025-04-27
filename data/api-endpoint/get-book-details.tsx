@@ -5,7 +5,7 @@ export const getBookDetailsApiParameters = [
     name: "slug",
     type: "string",
     required: true,
-    description: "Goodreads book SLUG",
+    description: "Goodreads book slug",
     placeholder: "18144590-the-alchemist",
   },
 ];
@@ -92,128 +92,8 @@ export const getBookDetailsApiResponse = {
 };
 
 export const getBookDetailsCodeSnippets: CodeSnippets = {
-  javascript: `// Using fetch
-const slug = '18144590-the-alchemist';
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
-fetch(\`\${baseUrl}/api/book/details/\${slug}\`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    // Process the book details
-    const book = data.book;
-    console.log(\`\${book.title} by \${book.author[0].name}\`);
-    console.log(\`Rating: \${book.rating}/5 (\${book.ratingCount} ratings)\`);
-    console.log(\`Published: \${book.publishDate}\`);
-    console.log(\`Genres: \${book.genres.join(', ')}\`);
-    console.log(\`Description: \${book.desc}\`);
-  })
-  .catch(error => console.error('Error fetching book details:', error));`,
-
-  typescript: `// Using axios with TypeScript
-import axios from 'axios';
-
-interface Author {
-  id: number;
-  name: string;
-  url: string;
-}
-
-interface Book {
-  cover: string;
-  series: string;
-  slug: string;
-  seriesURL?: string;
-  title: string;
-  author: Author[];
-  rating: string;
-  ratingCount: string;
-  reviewsCount: string;
-  desc: string;
-  genres: string[];
-  bookEdition: string;
-  publishDate: string;
-  // ... existing code ...
-}
-
-interface BookResponse {
-  success: boolean;
-  scrapedURL: string;
-  book: Book;
-}
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
-async function getBookDetails(slug: string): Promise<Book | null> {
-  try {
-    const response = await axios.get<BookResponse>(
-      \`\${baseUrl}/api/book/details/\${slug}\`
-    );
-    return response.data.book;
-  } catch (error) {
-    console.error('Error fetching book details:', error);
-    return null;
-  }
-}
-
-// Usage
-const slug = '18144590-the-alchemist';
-getBookDetails(slug).then(book => {
-  if (book) {
-    console.log(\`\${book.title} by \${book.author[0].name}\`);
-    console.log(\`Rating: \${book.rating}/5 (\${book.ratingCount} ratings)\`);
-    console.log(\`Published: \${book.publishDate}\`);
-  }
-});`,
-
-  python: `# Using requests in Python
-import requests
-import os
-
-def get_book_details(slug):
-    base_url = os.getenv('NEXT_PUBLIC_BASE_URL', 'http://localhost:3000')
-    response = requests.get(f'{base_url}/api/book/details/{slug}')
-    
-    if response.status_code == 200:
-        data = response.json()
-        return data
-    else:
-        print(f"Error: {response.status_code}")
-        return None
-
-# Usage
-slug = '18144590-the-alchemist'
-result = get_book_details(slug)
-
-if result:
-    book = result['book']
-    print(f"{book['title']} by {book['author'][0]['name']}")
-    print(f"Rating: {book['rating']}/5 ({book['ratingCount']} ratings)")
-    print(f"Published: {book['publishDate']}")
-    print(f"Genres: {', '.join(book['genres'])}")`,
-
-  nodejs: `// Next.js API route handler
-import { NextResponse } from 'next/server';
-
-export async function GET(request, { params }) {
-  const { slug } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  try {
-    const response = await fetch(\`\${baseUrl}/api/book/details/\${slug}\`);
-    
-    if (!response.ok) {
-      throw new Error(\`Failed to fetch book details: \${response.status}\`);
-    }
-    
-    const data = await response.json();
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('Error fetching book details:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch book details' },
-      { status: 500 }
-    );
-  }
-}`,
+  javascript: ``,
+  typescript: ``,
+  python: ``,
+  nodejs: ``,
 };

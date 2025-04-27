@@ -25,7 +25,6 @@ export async function GET(req: NextRequest,   { params }: { params: { slug: stri
     const cover = $(".ResponsiveImage").attr("src");
     const series = $("h3.Text__italic").text();
     const seriesURL = $("h3.Text__italic > a").attr("href");
-    const workURL = $('meta[property="og:url"]').attr("content");
     const title = $('h1[data-testid="bookTitle"]').text();
     const author = $(".ContributorLinksList > span > a")
       .map((i: number, el: any) => {
@@ -180,27 +179,27 @@ export async function GET(req: NextRequest,   { params }: { params: { slug: stri
       success: true,
       scrapedURL: scrapeURL,
       book: {
-        cover: cover,
-        series: series,
-        seriesURL: seriesURL,
-        slug: slug,
-        title: title,
-        author: author,
-        rating: rating,
-        ratingCount: ratingCount,
-        reviewsCount: reviewsCount,
-        description: description,
-        genres: genres,
-        bookEdition: bookEdition,
-        publishDate: publishDate,
-        related: related,
-        reviewBreakdown: reviewBreakdown,
-        reviews: reviews,
-        quotes: quotes,
-        quotesURL: quotesURL,
-        questions: questions,
-        questionsURL: questionsURL,
-        lastScraped: lastScraped,
+        cover,
+        series,
+        seriesURL,
+        slug,
+        title,
+        author,
+        rating,
+        ratingCount,
+        reviewsCount,
+        description,
+        genres,
+        bookEdition,
+        publishDate,
+        related,
+        reviewBreakdown,
+        reviews,
+        quotes,
+        quotesURL,
+        questions,
+        questionsURL,
+        lastScraped,
       }
     });
 

@@ -10,22 +10,27 @@ export function ApiDocs() {
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    if (hash && endpoints.some(e => e.id === hash)) {
+    if (hash && endpoints.some((e) => e.id === hash)) {
       setActiveEndpoint(hash);
     }
 
     const handleHashChange = () => {
       const newHash = window.location.hash.slice(1);
-      if (newHash && endpoints.some(e => e.id === newHash)) {
+      if (newHash && endpoints.some((e) => e.id === newHash)) {
         setActiveEndpoint(newHash);
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, [setActiveEndpoint]);
 
-  return (
-    <ApiContent endpoint={endpoints.find((e) => e.id === activeEndpoint)!} />
-  );
+  const endpoint = endpoints.find((e) => e.id === activeEndpoint);
+
+  // Remove console.log statements and handle no endpoint case
+  if (!endpoint) {
+    return null;
+  }
+
+  return <ApiContent endpoint={endpoint} />;
 }

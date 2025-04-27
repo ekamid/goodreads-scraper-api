@@ -24,7 +24,7 @@ To obtain an API key, [contact us](mailto:api@goodreads-scraper.com) or sign up 
 |----------|--------|-------------|
 | `/api/lists` | GET | Get book lists by category, genre, or popularity |
 | `/api/book/details/:slug` | GET | Get detailed information about a specific book |
-| `/api/authors/:id` | GET | Get detailed information about an author |
+| `/api/author/details/:slug` | GET | Get detailed information about an author |
 | `/api/search` | GET | Search for books by title, author, or ISBN |
 | `/api/users/:username/shelves` | GET | Get a user's bookshelves and their books |
 | `/api/book/details/:slug/reviews` | GET | Get reviews for a specific book |
@@ -152,6 +152,20 @@ The Goodreads Scraper API was built during a caffeine-fueled coding sprint as pa
 Since Goodreads shut down their API, one overwhelmed developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
 
 **Developer**: [Ebrahim Khalil](https://github.com/ekamid) (professional overthinker and sometimes pretends to be a book nerd)
+
+## 👥 Who Made This?
+
+The Goodreads Scraper API was built during a caffeine-fueled coding sprint as part of the R&D project [Nearby Bookish](https://bookishnearby.com); a platform that connects local readers to share books, engage in discussions, and foster a sense of community around reading.  
+Since Goodreads shut down their API, one overwhelmed developer (hi 👋) decided to make a new way to fetch book data — by scraping it.
+
+**Developer**: [Ebrahim Khalil](https://github.com/ekamid) (professional overthinker and sometimes pretends to be a book nerd)
+
+## Why We Made This?
+
+When Goodreads deprecated their public API in 2020, many book-related applications and services were left without a reliable source of book data. Although [Nearby Bookish](https://bookishnearby.com)didn't exist back then, while building it, we recognized the gap and the ongoing need for reliable book information. This API was created to fill that gap and to provide developers with easy access to the rich book data still available on Goodreads.
+
+**Why another scraper?** Because most existing ones are either outdated, fragile after Goodreads' redesign, or only cover basic data. We built ours to be more reliable, more complete, and easier for developers to integrate and scale with.
+
 
 ## 🙏 Credits
 

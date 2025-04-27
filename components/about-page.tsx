@@ -42,13 +42,16 @@ export function AboutPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <BookOpen className="mr-2 h-5 w-5 text-emerald-500" />
-                Why We Made This
+                Why We Made This?
               </CardTitle>
               <CardDescription>Our mission and purpose</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 relative z-10">
               <p className="text-slate-600 dark:text-slate-400">
-              When Goodreads deprecated their public API in 2020, many book-related applications and services were left without a reliable source of book data.Although <Link href="https://bookishnearby.com" className="text-emerald-500 hover:underline" target="_blank" rel="noopener noreferrer">Nearby Bookish</Link> didn’t exist back then, while building it, we recognized the gap and the ongoing need for reliable book information. This API was created to fill that gap and to provide developers with easy access to the rich book data still available on Goodreads.
+              When Goodreads deprecated their public API in 2020, many book-related applications and services were left without a reliable source of book data. Although <Link href="https://bookishnearby.com" className="text-emerald-500 hover:underline" target="_blank" rel="noopener noreferrer">Nearby Bookish</Link> didn’t exist back then, while building it, we recognized the gap and the ongoing need for reliable book information. This API was created to fill that gap and to provide developers with easy access to the rich book data still available on Goodreads.
+              </p>
+              <p>
+              <b>Why another scraper?</b> Most existing ones are either outdated, fragile after Goodreads' redesign, or only cover basic data. We built ours to be more reliable, more complete, and easier for developers to integrate and scale with.
               </p>
               <p className="text-slate-600 dark:text-slate-400">Our mission is to:</p>
               <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-1">
