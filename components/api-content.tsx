@@ -45,18 +45,46 @@ export function ApiContent({ endpoint }: ApiContentProps) {
   const [response, setResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState<Record<string, boolean>>({});
+  const [requestTime, setRequestTime] = useState<number | null>(null);
 
   const handleParamChange = (key: string, value: string) => {
     setParams((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleTryIt = () => {
+  const handleTryIt = async () => {
     setLoading(true);
-    // In a real implementation, this would make an actual API call
-    setTimeout(() => {
-      setResponse(JSON.stringify(endpoint.exampleResponse, null, 2));
+    try {
+      if (endpoint.id === "get-book-details") {
+        const slug = params.slug;
+        if (!slug) {
+          throw new Error("Slug is required");
+        }
+
+        const startTime = performance.now();
+        const response = await fetch(`/api/book/details/${slug}`);
+        const endTime = performance.now();
+        setRequestTime(endTime - startTime);
+
+        const data = await response.json();
+        setResponse(JSON.stringify(data, null, 2));
+      } else {
+        const startTime = performance.now();
+        // Simulate API call for example responses
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const endTime = performance.now();
+        setRequestTime(endTime - startTime);
+        
+        setResponse(JSON.stringify(endpoint.exampleResponse, null, 2));
+      }
+    } catch (error) {
+      setResponse(JSON.stringify({
+        error: "Failed to fetch book details",
+        message: error instanceof Error ? error.message : "Unknown error"
+      }, null, 2));
+      setRequestTime(null);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   const handleCopyCode = (language: string, code: string) => {
@@ -197,9 +225,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                     <div key={param.name}>
                       <Label htmlFor={param.name}>
                         {param.name}
-                        {param.required && (
-                          <span className="text-red-500">*</span>
-                        )}
+                        <span className="text-red-500">*</span>
                       </Label>
                       {param.type === "select" ? (
                         <Select
@@ -239,7 +265,7 @@ export function ApiContent({ endpoint }: ApiContentProps) {
 
                 <Button
                   onClick={handleTryIt}
-                  disabled={loading}
+                  disabled={loading || (endpoint.id === "get-book-details" && !params.slug)}
                   className="mb-6 bg-emerald-600 hover:bg-emerald-700"
                 >
                   {loading ? "Loading..." : "Execute Request"}
@@ -249,6 +275,11 @@ export function ApiContent({ endpoint }: ApiContentProps) {
                 {response && (
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Response</h3>
+                    {requestTime && (
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+                        Request completed in {requestTime.toFixed(2)}ms
+                      </p>
+                    )}
                     <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-mono text-sm overflow-auto max-h-96">
                       <pre>{response}</pre>
                     </div>

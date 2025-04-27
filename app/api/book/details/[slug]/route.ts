@@ -206,6 +206,7 @@ export async function GET(req: NextRequest,   { params }: { params: { slug: stri
 
   } catch (error) {
     return NextResponse.json({
+      success: false,
       status: "Error - Invalid Query",
       error: error instanceof Error ? error.message : "Unknown error",
     }, { status: 404 });
