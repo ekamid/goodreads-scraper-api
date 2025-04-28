@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API key authentication system
 - Rate limiting (1,000 requests per day for free tier)
 - Comprehensive documentation
-- Official JavaScript and Python client libraries
 
 ## [0.9.0] - 2024-03-15
 

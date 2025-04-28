@@ -3,6 +3,8 @@
 import { ReactNode, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import type { Endpoint } from "@/lib/api-endpoints";
+import { Badge } from "@/components/ui/badge"
+
 import {
   BookOpen,
   User,
@@ -89,7 +91,9 @@ export function ApiSidebar({
     <div className="w-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 md:h-screen md:sticky md:top-0 md:left-0 overflow-y-auto flex flex-col">
       <div className="p-4 border-b border-slate-200 dark:border-slate-800">
         <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-          Goodreads Scraper API
+          Goodreads Scraper API <Badge className="ml-2 bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
+                      v1.0.0
+                    </Badge>
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           API Documentation
@@ -112,50 +116,199 @@ export function ApiSidebar({
             </button>
 
             {isEndpointsOpen && (
-              <nav className="space-y-1">
-                {endpoints
-                  .filter(
-                    (endpoint) =>
-                      endpoint.id !== "about" && endpoint.id !== "changelog"
-                  )
-                  .map((endpoint) => (
-                    <Link
-                      key={endpoint.id}
-                      href={`/docs#${endpoint.id}`}
-                      onClick={() => setActiveEndpoint(endpoint.id)}
-                      className={cn(
-                        "flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors",
-                        activeEndpoint === endpoint.id
-                          ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
-                          : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "mr-2",
-                          activeEndpoint === endpoint.id
-                            ? "text-emerald-500 dark:text-emerald-400"
-                            : "text-slate-500 dark:text-slate-400"
-                        )}
-                      >
-                        {getIcon(endpoint.id)}
-                      </span>
-                      {endpoint.name}
-                      {endpoint.method && (
-                        <span
+              <div className="space-y-3">
+                {/* Books Category */}
+                <div>
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-3 mb-1 uppercase">
+                    Books
+                  </div>
+                  <nav className="space-y-1">
+                    {endpoints
+                      .filter((endpoint) =>
+                        ["get-book-lists", "get-book-details", "get-book-reviews", "get-book-quotes"].includes(
+                          endpoint.id,
+                        ),
+                      )
+                      .map((endpoint) => (
+                        <button
+                          key={endpoint.id}
+                          onClick={() => setActiveEndpoint(endpoint.id)}
                           className={cn(
-                            "ml-auto text-xs px-1.5 py-0.5 rounded-full",
-                            endpoint.method === "GET"
-                              ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
-                              : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+                            "flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors",
+                            activeEndpoint === endpoint.id
+                              ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
                           )}
                         >
-                          {endpoint.method}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
-              </nav>
+                          <span
+                            className={cn(
+                              "mr-2",
+                              activeEndpoint === endpoint.id
+                                ? "text-emerald-500 dark:text-emerald-400"
+                                : "text-slate-500 dark:text-slate-400",
+                            )}
+                          >
+                            {getIcon(endpoint.id)}
+                          </span>
+                          {endpoint.name}
+                          {endpoint.method && (
+                            <span
+                              className={cn(
+                                "ml-auto text-xs px-1.5 py-0.5 rounded-full",
+                                endpoint.method === "GET"
+                                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
+                                  : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+                              )}
+                            >
+                              {endpoint.method}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                  </nav>
+                </div>
+
+                {/* Authors Category */}
+                <div>
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-3 mb-1 uppercase">
+                    Authors
+                  </div>
+                  <nav className="space-y-1">
+                    {endpoints
+                      .filter((endpoint) => ["get-author-details"].includes(endpoint.id))
+                      .map((endpoint) => (
+                        <button
+                          key={endpoint.id}
+                          onClick={() => setActiveEndpoint(endpoint.id)}
+                          className={cn(
+                            "flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors",
+                            activeEndpoint === endpoint.id
+                              ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "mr-2",
+                              activeEndpoint === endpoint.id
+                                ? "text-emerald-500 dark:text-emerald-400"
+                                : "text-slate-500 dark:text-slate-400",
+                            )}
+                          >
+                            {getIcon(endpoint.id)}
+                          </span>
+                          {endpoint.name}
+                          {endpoint.method && (
+                            <span
+                              className={cn(
+                                "ml-auto text-xs px-1.5 py-0.5 rounded-full",
+                                endpoint.method === "GET"
+                                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
+                                  : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+                              )}
+                            >
+                              {endpoint.method}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                  </nav>
+                </div>
+
+                {/* Users Category */}
+                <div>
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-3 mb-1 uppercase">
+                    Users
+                  </div>
+                  <nav className="space-y-1">
+                    {endpoints
+                      .filter((endpoint) => ["get-user-shelves"].includes(endpoint.id))
+                      .map((endpoint) => (
+                        <button
+                          key={endpoint.id}
+                          onClick={() => setActiveEndpoint(endpoint.id)}
+                          className={cn(
+                            "flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors",
+                            activeEndpoint === endpoint.id
+                              ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "mr-2",
+                              activeEndpoint === endpoint.id
+                                ? "text-emerald-500 dark:text-emerald-400"
+                                : "text-slate-500 dark:text-slate-400",
+                            )}
+                          >
+                            {getIcon(endpoint.id)}
+                          </span>
+                          {endpoint.name}
+                          {endpoint.method && (
+                            <span
+                              className={cn(
+                                "ml-auto text-xs px-1.5 py-0.5 rounded-full",
+                                endpoint.method === "GET"
+                                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
+                                  : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+                              )}
+                            >
+                              {endpoint.method}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                  </nav>
+                </div>
+
+                {/* Search Category */}
+                <div>
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-3 mb-1 uppercase">
+                    Search
+                  </div>
+                  <nav className="space-y-1">
+                    {endpoints
+                      .filter((endpoint) => ["search-books"].includes(endpoint.id))
+                      .map((endpoint) => (
+                        <button
+                          key={endpoint.id}
+                          onClick={() => setActiveEndpoint(endpoint.id)}
+                          className={cn(
+                            "flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors",
+                            activeEndpoint === endpoint.id
+                              ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "mr-2",
+                              activeEndpoint === endpoint.id
+                                ? "text-emerald-500 dark:text-emerald-400"
+                                : "text-slate-500 dark:text-slate-400",
+                            )}
+                          >
+                            {getIcon(endpoint.id)}
+                          </span>
+                          {endpoint.name}
+                          {endpoint.method && (
+                            <span
+                              className={cn(
+                                "ml-auto text-xs px-1.5 py-0.5 rounded-full",
+                                endpoint.method === "GET"
+                                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
+                                  : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+                              )}
+                            >
+                              {endpoint.method}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                  </nav>
+                </div>
+              </div>
             )}
           </div>
 

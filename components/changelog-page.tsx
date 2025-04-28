@@ -96,10 +96,8 @@ export function ChangelogPage() {
                         </li>
                       </ul>
                     </li>
-                    <li>API key authentication system</li>
-                    <li>Rate limiting (1,000 requests per day for free tier)</li>
+                    <li>Rate limiting (100 requests per day per endpoint)</li>
                     <li>Comprehensive documentation</li>
-                    <li>Official JavaScript and Python client libraries</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -144,47 +142,11 @@ export function ChangelogPage() {
                   </ul>
                 </CardContent>
               </Card>
-
-              <Card className="mb-4 border-purple-100 dark:border-purple-900/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center">Planned for v1.2.0</CardTitle>
-                  <CardDescription>Expected release: July 2024</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>GraphQL API support alongside REST</li>
-                    <li>WebSocket support for real-time updates</li>
-                    <li>OAuth2 authentication option</li>
-                    <li>Enhanced analytics for API usage</li>
-                    <li>Improved caching mechanisms</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="mb-6 border-red-100 dark:border-red-900/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-red-600 dark:text-red-400">
-                    Breaking Changes in v2.0.0
-                  </CardTitle>
-                  <CardDescription>Expected release: Q3 2024</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                    <li>The response format will be standardized across all endpoints</li>
-                    <li>Some fields will be renamed for consistency</li>
-                    <li>
-                      Authentication will require API keys to be passed in headers only (query parameters will be
-                      deprecated)
-                    </li>
-                    <li>Rate limits will be adjusted based on usage patterns</li>
-                  </ul>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-6">
+        <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-6 hidden">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Legacy Versions Support</h2>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">

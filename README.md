@@ -16,8 +16,6 @@ The Goodreads Scraper API provides developers with access to book data from Good
 https://gdscraper.bookishnearby.com
 ```
 
-To obtain an API key, [contact us](mailto:api@goodreads-scraper.com) or sign up on our [developer portal](https://api.goodreads-scraper.com/developers).
-
 ## 📋 Available Endpoints
 
 | Endpoint | Method | Description |
@@ -87,20 +85,6 @@ fetch('https://api.goodreads-scraper.com/api/lists?type=bestsellers&limit=10', {
 .catch(error => console.error('Error fetching book lists:', error));
 ```
 
-## 📦 Installation
-
-### Node.js (npm)
-
-```bash
-npm install goodreads-scraper-api
-```
-
-### Python (pip)
-
-```bash
-pip install goodreads-scraper-api
-```
-
 ## 📘 Documentation
 
 For complete documentation, visit our [API Documentation](https://api.goodreads-scraper.com/docs).
@@ -121,10 +105,10 @@ Want unlimited requests? You can:
 
 ```bash
 # Clone the repository
-git clone https://github.com/ekamid/goodreads-scrapper.git
+git clone https://github.com/ekamid/goodreads-scraper-api.git
 
 # Install dependencies
-cd goodreads-scrapper
+cd goodreads-scraper-api
 npm install
 
 # Start the development server

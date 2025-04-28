@@ -15,7 +15,7 @@ export function AboutPage() {
       transition={{ duration: 0.3 }}
     >
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">About Goodreads Scraper API</h1>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">Overview</h1>
 
         <div className="grid gap-6">
           <Card className="overflow-hidden border-emerald-100 dark:border-emerald-900/30">
@@ -139,16 +139,12 @@ export function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-4 relative z-10">
               <p className="text-slate-600 dark:text-slate-400">
-                The Goodreads Scraper API is provided for non-commercial use. If you're using it for a commercial
-                project, please contact us for licensing options.
-              </p>
-              <p className="text-slate-600 dark:text-slate-400">
                 Please note that this API is not affiliated with or endorsed by Goodreads or Amazon. It is an
                 independent project that scrapes publicly available data from Goodreads.
               </p>
               <p className="text-slate-600 dark:text-slate-400">We kindly ask that you:</p>
               <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-1">
-                <li>Respect Goodreads' terms of service</li>
+                <li>Respect Goodreads' <Link href="https://www.goodreads.com/about/terms" target="_blank">terms of service</Link></li>
                 <li>Cache data when possible to reduce load on our servers</li>
                 <li>Credit our API in your application</li>
                 <li>Do not use the API for scraping or data harvesting purposes</li>
