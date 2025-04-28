@@ -44,6 +44,8 @@ export interface Endpoint {
   codeSnippets: CodeSnippets;
 }
 
+export type ApiEndPointID = "get_book_details" | "get_author_details" | "get_author_books" | 'search_books' | 'get_book_lists' | 'get_book_quotes' | 'get_book_reviews' | 'get_user_shelves';
+
 export const endpoints: Endpoint[] = [
   {
     id: "get-book-lists",
@@ -68,30 +70,6 @@ export const endpoints: Endpoint[] = [
     parameters: getBookDetailsApiParameters,
     exampleResponse: getBookDetailsApiResponse,
     codeSnippets: getBookDetailsCodeSnippets,
-  },
-  {
-    id: "get-author-details",
-    name: "Get Author Details",
-    description:
-      "Retrieve detailed information about an author by their Goodreads slug.",
-    method: "GET",
-    url: "/api/author/details/:slug",
-    route: "/api/author/details",
-    parameters: getAuthorDetailsApiParameters,
-    exampleResponse: getAuthorDetailsApiResponse,
-    codeSnippets: getBookListsCodeSnippets,
-  },
-  {
-    id: "get-author-books",
-    name: "Get Author Books",
-    description:
-      "Retrieve author's books by their Goodreads slug.",
-    method: "GET",
-    url: "/api/author/books/:slug",
-    route: "/api/author/books/",
-    parameters: getAuthorBooksApiParameters,
-    exampleResponse: getAuthorDetailsApiResponse,
-    codeSnippets: getBookListsCodeSnippets,
   },
   {
     id: "search-books",
@@ -360,5 +338,29 @@ export const endpoints: Endpoint[] = [
       python: ``,
       nodejs: ``,
     },
+  },
+  {
+    id: "get-author-details",
+    name: "Get Author Details",
+    description:
+      "Retrieve detailed information about an author by their Goodreads slug.",
+    method: "GET",
+    url: "/api/author/details/:slug",
+    route: "/api/author/details",
+    parameters: getAuthorDetailsApiParameters,
+    exampleResponse: getAuthorDetailsApiResponse,
+    codeSnippets: getBookListsCodeSnippets,
+  },
+  {
+    id: "get-author-books",
+    name: "Get Author Books",
+    description:
+      "Retrieve author's books by their Goodreads slug.",
+    method: "GET",
+    url: "/api/author/books/:slug",
+    route: "/api/author/books/",
+    parameters: getAuthorBooksApiParameters,
+    exampleResponse: getAuthorDetailsApiResponse,
+    codeSnippets: getBookListsCodeSnippets,
   },
 ];

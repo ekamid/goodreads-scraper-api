@@ -6,7 +6,7 @@ export const API_CONFIG = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
   baseURL: "https://www.goodreads.com",
   rateLimit: rateLimit({
-    interval: 60 * 1000, // 1 minute
+    interval: 24 * 60 * 60 * 1000, // 1 minute
     uniqueTokenPerInterval: 500 // Max 500 users per minute
   })
 };

@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    await API_CONFIG.rateLimit.check(req, 100, "CACHE_TOKEN");
+    await API_CONFIG.rateLimit.check(req, "get_author_books");
   } catch {
     return NextResponse.json({ error: "Too Many Requests" }, { status: 429 });
   }

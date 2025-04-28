@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 export async function GET(req: NextRequest,   { params }: { params: { slug: string } }) {
   try {
     // Apply rate limiting
-    await API_CONFIG.rateLimit.check(req, 100, 'CACHE_TOKEN');
+    await API_CONFIG.rateLimit.check(req, "get_book_details");
   } catch {
     return NextResponse.json(
       { error: "Too Many Requests" },

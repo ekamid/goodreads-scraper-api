@@ -155,6 +155,38 @@ export function AboutPage() {
               </ul>
             </CardContent>
           </Card>
+
+          <Card className="overflow-hidden border-emerald-100 dark:border-emerald-900/30">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <ExternalLink className="mr-2 h-5 w-5 text-emerald-500" />
+                Rate Limits
+              </CardTitle>
+              <CardDescription>API usage limitations and self-hosting options</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 relative z-10">
+              <p className="text-slate-600 dark:text-slate-400">
+                This API is completely free to use with the following limitations:
+              </p>
+              <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-1">
+                <li>100 requests per day per endpoint</li>
+                <li>Rate limits are tracked per IP address</li>
+                <li>Each endpoint has its own independent counter</li>
+              </ul>
+              
+              <p className="text-slate-600 dark:text-slate-400 mt-4 font-semibold">Need Unlimited Access?</p>
+              <p className="text-slate-600 dark:text-slate-400">
+                Want unlimited requests? You can:
+              </p>
+              <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-1">
+                <li>Clone this repository</li>
+                <li>Self-host the API on your own server</li>
+                <li>Modify rate limits as needed</li>
+              </ul>
+
+
+            </CardContent>
+          </Card>
         </div>
       </div>
     </motion.div>

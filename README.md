@@ -107,9 +107,30 @@ For complete documentation, visit our [API Documentation](https://api.goodreads-
 
 ## 📊 Rate Limits
 
-- Free tier: 1,000 requests per day
-- Pro tier: 10,000 requests per day
-- Enterprise tier: Custom limits
+This API is completely free to use with the following limitations:
+- 100 requests per day per endpoint
+- Rate limits are tracked per IP address
+- Each endpoint has its own independent counter
+
+### 🚀 Need Unlimited Access?
+
+Want unlimited requests? You can:
+1. Clone this repository
+2. Self-host the API on your own server
+3. Modify rate limits as needed
+
+```bash
+# Clone the repository
+git clone https://github.com/ekamid/goodreads-scrapper.git
+
+# Install dependencies
+cd goodreads-scrapper
+npm install
+
+# Start the development server
+npm run dev
+
+``
 
 ## 🔄 Response Format
 
@@ -135,16 +156,6 @@ In case of an error:
   }
 }
 ```
-
-## 🛠️ Error Codes
-
-| Code | Description |
-|------|-------------|
-| `INVALID_API_KEY` | The API key is invalid or missing |
-| `RATE_LIMIT_EXCEEDED` | You have exceeded your rate limit |
-| `RESOURCE_NOT_FOUND` | The requested resource was not found |
-| `INVALID_PARAMETERS` | The request parameters are invalid |
-| `SERVER_ERROR` | An internal server error occurred |
 
 ## 👥 Who Made This?
 
@@ -182,7 +193,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ## 📞 Support
 
-If you need help or have any questions, please [create an issue](https://github.com/ekamid/goodreads-scraper-api/issues/new) or contact us at [ebrahimkha@gmail.com](mailto:ebrahimkha@gmail.com).
+If you need help or have any questions, please [create an issue](https://github.com/ekamid/goodreads-scraper-api/issues/new) or contact us at [ebrahimkha@gmail.com](mailto:ebrahimkha71@gmail.com).
 
 If you find this project helpful, consider buying me a coffee:
 
